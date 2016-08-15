@@ -5,4 +5,4 @@ Website: http://tadbir.it
 Website: http://mshams.ir
 
 
-![Screenshot](https://raw.github.com/mshams/PersianJustifiedTextView/tree/master/it.tadbir.ui.persianjustifiedtextview/src/main/assets/snapshot.png)
+![Screenshot](https://github.com/mshams/PersianJustifiedTextView/blob/master/app/src/main/assets/snapshot.png)
