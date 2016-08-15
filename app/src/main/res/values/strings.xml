@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PersianJustifiedTextView</string>
+    <string name="txt_append">Text to append</string>
+    <string name="btn_append">Append</string>
+    <string name="txt_test">Tadbir Studio is a leading company in mobile software design and development.\nContact us at http://tadbir.it, any comments.</string>
+    <string name="txt_title">PersianJustifiedTextView\nby\nTadbir Studio</string>
+</resources>

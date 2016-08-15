@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PersianJustifiedTextView.iml" filepath="$PROJECT_DIR$/PersianJustifiedTextView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/it.tadbir.ui.persianjustifiedtextview/it.tadbir.ui.persianjustifiedtextview.iml" filepath="$PROJECT_DIR$/it.tadbir.ui.persianjustifiedtextview/it.tadbir.ui.persianjustifiedtextview.iml" />
+    </modules>
+  </component>
+</project>
