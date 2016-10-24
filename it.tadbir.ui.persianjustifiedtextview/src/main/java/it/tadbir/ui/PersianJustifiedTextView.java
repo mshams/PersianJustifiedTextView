@@ -2,6 +2,7 @@ package it.tadbir.ui;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by Mohammad Shams on 8/14/2016.
  * Goal: Having a fast JustifiedTextView
- * <p>
+ * <p/>
  * Change Log: V1.0 8/14/2016
  * Class creation
  */
@@ -46,8 +47,8 @@ public class PersianJustifiedTextView extends TextView {
         if (isInEditMode())
             return;
 
-
         //Log.d(TAG, "init Class");
+
         paddings = getPaddingLeft() + getPaddingRight();
         realText = super.getText().toString();
 
@@ -63,6 +64,12 @@ public class PersianJustifiedTextView extends TextView {
         });
     }
 
+    private float calcWidthSize(String cha, float currentSize) {
+        TextPaint paint = new TextPaint();
+        paint.setTextSize(currentSize);
+        return paint.measureText(cha, 0, cha.length());
+    }
+
     private void justify() {
         String tmp = realText;
         paint = this.getPaint();
@@ -75,6 +82,9 @@ public class PersianJustifiedTextView extends TextView {
         String[] breakedLines = tmp.split("\\n");
         int breakedLinesCount = breakedLines.length;
 
+        //Log.d(TAG, "sentences:" + String.valueOf(breakedLines));
+
+
         for (int i = 0; i < breakedLinesCount; i++) {
             tmp = breakedLines[i];
             words = tmp.split("\\s");
@@ -85,7 +95,7 @@ public class PersianJustifiedTextView extends TextView {
             for (int j = 1; j < wordCount; j++) {
                 word = words[j];
 
-                if (paint.measureText(tmp + SPACE + word) <= realWidth) {
+                if ((int) Math.ceil(paint.measureText(tmp + SPACE + word + SPACE)) <= realWidth) {
                     tmp = tmp + SPACE + word;
                 } else {
                     tmp = spaceFill(tmp);
@@ -96,6 +106,7 @@ public class PersianJustifiedTextView extends TextView {
 
             lineList.add(tmp);
             breakedLines[i] = TextUtils.join(SPACE, lineList);
+            //breakedLines[i] = TextUtils.join("\n", lineList);
         }
 
         setText(TextUtils.join("\n", breakedLines));
@@ -105,6 +116,8 @@ public class PersianJustifiedTextView extends TextView {
 
     private String spaceFill(String str) {
         if (str.contains(SPACE)) {
+            //Log.d(TAG, "len: " + String.valueOf(str.length()) + " Str: " + str);
+
             int pos = 0;
             String temp;
 
@@ -115,7 +128,14 @@ public class PersianJustifiedTextView extends TextView {
 
                 temp = str.substring(0, pos) + SPACE + str.substring(pos, str.length());
 
-                if (paint.measureText(temp) < realWidth) {
+                //Rect bound = new Rect();
+                //paint.getTextBounds(temp, 0, temp.length(), bound);
+                //float width = Math.max(bound.width(), bound.right) + Math.abs(bound.left);
+                //Log.d(TAG, String.valueOf(paint.measureText(temp)) + " " + String.valueOf(bound.left) + " " + String.valueOf(bound.right) + " " + String.valueOf(bound.width()));
+                //Log.d(TAG, String.valueOf(Math.ceil(paint.measureText(temp))));
+                //Log.d(TAG, String.valueOf(calcWidthSize(temp, paint.getTextSize())));
+
+                if ((int) Math.ceil(paint.measureText(temp + SPACE)) < realWidth) {
                     str = temp;
                 } else {
                     break;
@@ -124,6 +144,8 @@ public class PersianJustifiedTextView extends TextView {
                 pos += 2;
                 //if (pos >= tmp.length()) pos = 0;
             }
+
+            //Log.d(TAG, "len: " + String.valueOf(str.length()) + " Str: " + str);
         }
 
         return str;
